@@ -7,7 +7,7 @@ fn main() {
         io::stdin().read_line(&mut input).expect("Failure");
         trial +=  1;
         if input.trim() == "The letter e"{
-            println!("Number of trials : {}", trial);
+            println!("Number of trials: {}", trial);
             break;
         }
     }
