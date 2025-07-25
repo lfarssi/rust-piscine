@@ -7,8 +7,8 @@ pub fn delete_and_backspace(s: &mut String) {
         if c == Some('-') {
             if i>0 && s.chars().nth(i-1)!=Some('-'){
 
-            s.remove(i-1);
-            s.remove(i);
+                s.remove(i);
+                s.remove(i-1);
             i-=1;
             }
                 }
