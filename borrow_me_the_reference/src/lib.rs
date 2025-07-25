@@ -8,7 +8,7 @@ pub fn delete_and_backspace(s: &mut String) {
             if i>0 && s.chars().nth(i-1)!=Some('-'){
 
             s.remove(i-1);
-            s.remove(i-1);
+            s.remove(i);
             i-=1;
             }
                 }
@@ -19,9 +19,8 @@ pub fn delete_and_backspace(s: &mut String) {
                                 
             } 
         }
-        if i < s.len() {
-                i += 1;
-            }
+        i += 1;
+            
     }
     }
 }
