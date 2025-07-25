@@ -14,13 +14,13 @@ pub fn is_ascii(v: &str) -> bool {
 }
 
 pub fn contains(v: &str, pat: &str) -> bool {
-    // for i in 0..v.len()-pat.len(){
-    //     if &v[i..pat.len()] == pat{
-    //         return true;
-    //     }
-    // }
-    // return false;
-    v.contains(pat)
+    for i in 0..v.len()-pat.len(){
+        if &v[i..i+pat.len()] == pat{
+            return true;
+        }
+    }
+    return false;
+    // v.contains(pat)
 }
 
 pub fn split_at(v: &str, index: usize) -> (&str, &str) {
