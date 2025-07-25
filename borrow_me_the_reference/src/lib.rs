@@ -12,9 +12,12 @@ pub fn delete_and_backspace(s: &mut String) {
         while i< s.len(){
         let c= s.chars().nth(i);
         if c == Some('-') {
-            s.remove(i);
+            if i>0 && s.chars().nth(i-1)!=Some('-'){
+
             s.remove(i-1);
+            s.remove(i);
             i-=1;
+            }
                 }
         if c== Some('+'){
             if i<s.len()-1 && s.chars().nth(i+1)!=Some('+'){
