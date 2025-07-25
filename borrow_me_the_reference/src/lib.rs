@@ -1,12 +1,5 @@
 pub fn delete_and_backspace(s: &mut String) {
-    // for c in s.chars().enumerate(){
-    //     if c.1 == '-'{
-    //         s.remove((c.0)-1);
-    //     }
-    //     if c.1 == '+'{
-    //         s.remove((c.0)+1);   
-    //     }
-    // }
+  
     while s.contains('-') || s.contains('+'){
         let mut i =0;
         while i< s.len(){
@@ -26,7 +19,9 @@ pub fn delete_and_backspace(s: &mut String) {
                                 
             } 
         }
-        i+=1;
+        if i < s.len() {
+                i += 1;
+            }
     }
     }
 }
