@@ -1,3 +1,3 @@
-pub fn fibonacci(n: u32) -> u32 {
-    if n<2  {n} else {fibonacci(n-1)+fibonacci(n-2)}
+pub fn fibonacci(n: usize) -> u64 {
+    if n<2  {n as u64} else {fibonacci(n-1)+fibonacci(n-2)}
 }

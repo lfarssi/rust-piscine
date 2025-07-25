@@ -4,7 +4,7 @@ fn main() {
     println!(
         "The element in the position {} in fibonacci series is {}",
         2,
-        fibonacci(2)
+        fibonacci(48)
     );
     println!(
         "The element in the position {} in fibonacci series is {}",
