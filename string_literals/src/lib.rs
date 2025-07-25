@@ -5,11 +5,11 @@ pub fn is_empty(v: &str) -> bool {
 
 pub fn is_ascii(v: &str) -> bool {
     for c in v.chars(){
-        if (c as u32) <= 127{
-            return true;
+        if (c as u32) > 127{
+            return false;
         }
     }
-    return false;
+    return true;
     // v.is_ascii()
 }
 
