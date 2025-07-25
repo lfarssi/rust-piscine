@@ -1,28 +1,22 @@
 pub fn delete_and_backspace(s: &mut String) {
-  
-    while s.contains('-') || s.contains('+'){
-        let mut i =0;
-        while i< s.len(){
-        let c= s.chars().nth(i);
-        if c == Some('-') {
-            if i>0 && s.chars().nth(i-1)!=Some('-'){
+        
+        let mut res =String::new();
+        let mut count= 0;
+        for c in s.chars(){
+                if c=='-'{
+                res.pop();
+                }else if c=='+'{
+                    count+=1;
+                }else{
+                    if count !=0{
+                        count-=1;
+                        continue;
+                    }
+                    res.push(c);
 
-                s.remove(i);
-                s.remove(i-1);
-            i-=1;
-            }
                 }
-        if c== Some('+'){
-            if i<s.len()-1 && s.chars().nth(i+1)!=Some('+'){
-                s.remove(i+1);
-                s.remove(i); 
-                                
-            } 
         }
-        i += 1;
-            
-    }
-    }
+        *s=res;
 }
 
 pub fn do_operations(v: &mut [String]) {
