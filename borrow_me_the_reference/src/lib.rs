@@ -17,6 +17,7 @@ pub fn delete_and_backspace(s: &mut String) {
                 }
         }
         *s=res;
+        
 }
 
 pub fn do_operations(v: &mut [String]) {
