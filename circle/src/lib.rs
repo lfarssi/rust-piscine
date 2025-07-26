@@ -31,6 +31,6 @@ impl Point {
     pub fn distance(&self,circle2: Point)->f64{
         let x= self.0-circle2.0;
         let y= self.1-circle2.1;
-        (x.powf(x)+y.powf(x)).sqrt()
+        (x.powi(2)+y.powi(2)).sqrt()
     }
 }
