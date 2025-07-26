@@ -1,21 +1,21 @@
-use std::f32::consts::PI;
+use std::f64::consts::PI;
 #[derive(Debug, Clone, Copy)]
 pub struct Circle {
 	pub center: Point,
-	pub radius: f32,
+	pub radius: f64,
 }
 
 impl Circle {
-    pub fn new(x:f32, y:f32, radius:f32)->Self{
+    pub fn new(x:f64, y:f64, radius:f64)->Self{
         Self{
             radius: radius,
             center:Point(x,y),
         }
     }
-   pub fn diameter(&self)->f32{
+   pub fn diameter(&self)->f64{
         self.radius*2.0
    }
-   pub fn area(&self)->f32{
+   pub fn area(&self)->f64{
     PI*self.radius*self.radius
    }
    pub fn intersect(&self, circle2:Circle)->bool{
@@ -25,10 +25,10 @@ impl Circle {
 }
 
 #[derive(Debug, Clone, Copy)]
-pub struct Point(pub f32,pub f32);
+pub struct Point(pub f64,pub f64);
 
 impl Point {
-    pub fn distance(&self,circle2: Point)->f32{
+    pub fn distance(&self,circle2: Point)->f64{
         let x= self.0-circle2.0;
         let y= self.1-circle2.1;
         (x.powf(x)+y.powf(x)).sqrt()
