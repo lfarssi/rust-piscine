@@ -26,14 +26,14 @@ pub fn mode(list: &[i32]) -> i32 {
     for i in list.iter(){
         map.entry(i).and_modify(|val| *val+=1).or_insert(1);
     }
-    let mut max=0;
-    let mut key=0;
+    let mut hh = (i32,i32);
+
     map.iter().for_each(|m| {
-        if max < *m.1{
-            max=*m.1;
-            key=**m.0 ;
+        if hh.0 < *m.1{
+            hh.0=*m.1;
+            hh.1=**m.0 ;
         }
     });
-    key
+    hh.1
     
 }
