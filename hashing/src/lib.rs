@@ -34,6 +34,6 @@ pub fn mode(list: &[i32]) -> i32 {
             res.1=**m.0 ;
         }
     });
-    hh.1
+    res.1
     
 }
