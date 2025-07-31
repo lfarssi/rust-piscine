@@ -4,7 +4,8 @@ fn main() {
     println!("{}", fetch_data(Ok("server1.com"), Security::Warning));
     println!("{}", fetch_data(Err("server.com"), Security::Warning));
     println!("{}", fetch_data(Err("server2.com"), Security::NotFound));
-
+    let result = fetch_data(Err(""), Security::Warning);
+    println!("Actual output: {}", result);
     // Panics with no custom message
     // fetch_data(Err("ERROR CRITICAL"), Security::Unknown);
 
