@@ -14,7 +14,7 @@ impl Circle {
     }
    pub fn diameter(&self)->f64{
         self.radius*2.0
-   }
+   }    
    pub fn area(&self)->f64{
     PI*self.radius*self.radius
    }

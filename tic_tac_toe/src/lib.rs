@@ -29,8 +29,7 @@ pub fn diagonals(player: char, table: [[char; 3]; 3]) -> bool {
         i+=1;
     }
     return false;
-}
-
+} 
 pub fn horizontal(player: char, table: [[char; 3]; 3]) -> bool {
     for row in table.iter(){
         if row.iter().all(|&col| col==player){
