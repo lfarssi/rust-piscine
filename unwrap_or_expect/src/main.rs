@@ -6,7 +6,7 @@ fn main() {
     println!("{}", fetch_data(Err("server2.com"), Security::NotFound));
     let result = fetch_data(Err(""), Security::Warning);
     println!("{}", result);
-
+println!("{}",fetch_data(Ok("malicious_server.com"), Security::UnexpectedUrl))
     
     // Panics with no custom message
     // fetch_data(Err("ERROR CRITICAL"), Security::Unknown);
