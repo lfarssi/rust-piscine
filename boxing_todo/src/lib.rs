@@ -1,9 +1,10 @@
 mod err;
+pub use err::{ParseErr, ReadErr};
 
-use err::{ParseErr, ReadErr};
-use std::{error::Error, fs};
+use std::error::Error;
+use std::fs;
 
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Debug, Eq, PartialEq, Clone)]
 pub struct Task {
     pub id: u32,
     pub description: String,
@@ -18,46 +19,33 @@ pub struct TodoList {
 
 impl TodoList {
     pub fn get_todo(path: &str) -> Result<TodoList, Box<dyn Error>> {
-        let content = fs::read_to_string(path)
-            .map_err(|e| Box::new(ReadErr { child_err: Box::new(e) }) as Box<dyn Error>)?;
+        let content = match fs::read_to_string(path) {
+            Ok(c) => c,
+            Err(e) => return Err(Box::new(
+                ReadErr {
+                    child_err: Box::new(e),
+                }
+            ))
+        };
+        
 
-        let parsed = json::parse(&content)
-            .map_err(|e| Box::new(ParseErr::Malformed(Box::new(e))) as Box<dyn Error>)?;
-
-        let title = parsed["title"]
-            .as_str()
-            .ok_or_else(|| Box::new(ParseErr::Malformed("Missing title".to_string().into())))?
-            .to_string();
-
-        let tasks_json = &parsed["tasks"];
-        if !tasks_json.is_array() {
-            return Err(Box::new(ParseErr::Malformed("Tasks not array".to_string().into())));
+        let parse = json::parse(&content).map_err(|error| ParseErr::Malformed(Box::new(error)))?;
+        if parse["tasks"].is_empty() {
+            return Err(Box::new(ParseErr::Empty))
         }
 
-        let mut tasks = Vec::new();
-        for task in tasks_json.members() {
-            let id = task["id"]
-                .as_u32()
-                .ok_or_else(|| Box::new(ParseErr::Malformed("Invalid id".to_string().into())))?;
-            let description = task["description"]
-                .as_str()
-                .ok_or_else(|| Box::new(ParseErr::Malformed("Invalid description".to_string().into())))?
-                .to_string();
-            let level = task["level"]
-                .as_u32()
-                .ok_or_else(|| Box::new(ParseErr::Malformed("Invalid level".to_string().into())))?;
-
-            tasks.push(Task {
-                id,
-                description,
-                level,
-            });
-        }
-
-        if tasks.is_empty() {
-            return Err(Box::new(ParseErr::Empty));
-        }
-
-        Ok(TodoList { title, tasks })
+        Ok(
+            Self {
+                title: parse["title"].as_str().unwrap().to_owned(),
+                tasks: parse["tasks"]
+                    .members()
+                    .map(|m| Task {
+                        id: m["id"].as_u32().unwrap(),
+                        description: m["description"].as_str().unwrap().to_owned(),
+                        level: m["level"].as_u32().unwrap(),
+                    })
+                    .collect(),
+            }
+        )
     }
 }
