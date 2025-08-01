@@ -1,3 +1,4 @@
+#[allow(dead_code)]
 use std::{collections::HashMap, num::ParseFloatError};
 #[derive(Debug)]
 pub struct Flag {
@@ -17,6 +18,7 @@ impl<'a> Flag {
 }
 
 pub type Callback = fn(&str, &str) -> Result<String, ParseFloatError>;
+#[derive(Debug)]
 
 pub struct FlagsHandler {
     pub flags: HashMap<(String,String), Callback>,
