@@ -1,4 +1,4 @@
-use std::{error::Error, fmt::Display};
+use std::{error::Error, fmt::{Display,Formatter, Result as Res}};
 #[derive(Debug)]
 pub enum ParseErr {
     Empty,
@@ -6,7 +6,7 @@ pub enum ParseErr {
 }
 
 impl Display for ParseErr {
-    fn fmt(&self, f:&mut std::fmt::Formatter<'_>)->std::fmt::Result{
+    fn fmt(&self, f:&mut Formatter<'_>)->Res{
         write!(f,"Failed to parse file")
     }
 
@@ -28,7 +28,7 @@ pub struct ReadErr {
 }
 
 impl Display for ReadErr {
-      fn fmt(&self, f:&mut std::fmt::Formatter<'_>)->std::fmt::Result{
+      fn fmt(&self, f:&mut Formatter<'_>)->Res{
         write!(f,"Failed to read file")
     }
 
