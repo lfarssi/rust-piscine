@@ -28,12 +28,12 @@ impl Form {
     
     pub fn validate(&self) -> Result<(), FormError> {
         if self.name.is_empty(){
-            Err(FormError::new("name",self.name.clone(),"User is empty".to_string()))
+            Err(FormError::new("name",self.name.clone(),"User is empty"))
         }else if self.password.len()<8{
-            Err(FormError::new("password",self.password.clone(),"Password should be at least 8 characters long".to_string()))
+            Err(FormError::new("password",self.password.clone(),"Password should be at least 8 characters long"))
 
         }else if !valid(&self.password)  {
-            Err(FormError::new("password",self.password.clone(),"Password should be a combination of ASCII numbers, letters and symbols".to_string()))
+            Err(FormError::new("password",self.password.clone(),"Password should be a combination of ASCII numbers, letters and symbols"))
             
         }else{
             Ok(())
