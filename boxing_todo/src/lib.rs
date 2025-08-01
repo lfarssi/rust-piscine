@@ -1,9 +1,7 @@
-// lib.rs
 mod err;
 
+use err::{ParseErr, ReadErr};
 use std::{error::Error, fs};
-use json::JsonValue;
-use crate::err::{ParseErr, ReadErr};
 
 #[derive(Debug, Eq, PartialEq)]
 pub struct Task {
@@ -19,44 +17,47 @@ pub struct TodoList {
 }
 
 impl TodoList {
-    /// Tries to read and parse the todo list from a file
     pub fn get_todo(path: &str) -> Result<TodoList, Box<dyn Error>> {
-        // First, attempt to read the file
         let content = fs::read_to_string(path)
-            .map_err(|e| Box::new(ReadErr {
-                child_err: Box::new(e),
-            }) as Box<dyn Error>)?;
+            .map_err(|e| Box::new(ReadErr { child_err: Box::new(e) }) as Box<dyn Error>)?;
 
-        // Attempt to parse the JSON content
-        let json: JsonValue = json::parse(&content).map_err(|e| Box::new(ParseErr::Malformed(Box::new(e))) as Box<dyn Error>)?;
+        let parsed = json::parse(&content)
+            .map_err(|e| Box::new(ParseErr::Malformed(Box::new(e))) as Box<dyn Error>)?;
 
-        // Check if there are tasks in the JSON and return an error if there are none
-        let tasks = json["tasks"].members().collect::<Vec<_>>();
+        let title = parsed["title"]
+            .as_str()
+            .ok_or_else(|| Box::new(ParseErr::Malformed("Missing title".to_string().into())))?
+            .to_string();
+
+        let tasks_json = &parsed["tasks"];
+        if !tasks_json.is_array() {
+            return Err(Box::new(ParseErr::Malformed("Tasks not array".to_string().into())));
+        }
+
+        let mut tasks = Vec::new();
+        for task in tasks_json.members() {
+            let id = task["id"]
+                .as_u32()
+                .ok_or_else(|| Box::new(ParseErr::Malformed("Invalid id".to_string().into())))?;
+            let description = task["description"]
+                .as_str()
+                .ok_or_else(|| Box::new(ParseErr::Malformed("Invalid description".to_string().into())))?
+                .to_string();
+            let level = task["level"]
+                .as_u32()
+                .ok_or_else(|| Box::new(ParseErr::Malformed("Invalid level".to_string().into())))?;
+
+            tasks.push(Task {
+                id,
+                description,
+                level,
+            });
+        }
+
         if tasks.is_empty() {
             return Err(Box::new(ParseErr::Empty));
         }
 
-        // Deserialize tasks
-        let tasks: Vec<Task> = tasks.iter().filter_map(|task| {
-            if let (Some(id), Some(description), Some(level)) = (
-                task["id"].as_u32(),
-                task["description"].as_str(),
-                task["level"].as_u32(),
-            ) {
-                Some(Task {
-                    id,
-                    description: description.to_string(),
-                    level,
-                })
-            } else {
-                None
-            }
-        }).collect();
-
-        // Extract the title from JSON
-        let title = json["title"].as_str().unwrap_or("Untitled").to_string();
-
-        // Return the parsed TodoList
         Ok(TodoList { title, tasks })
     }
 }
