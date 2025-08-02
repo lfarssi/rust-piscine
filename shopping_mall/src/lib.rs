@@ -20,26 +20,27 @@ pub fn biggest_store(mall: &Mall)-> (String, Store){
 }
 
 
-
-pub fn highest_paid_employee(mall: &Mall) -> Vec<(String, Employee)> {
-    let mut max_salary = 0.0;
-    let mut result = Vec::new();
+pub fn highest_paid_employee(mall: &Mall) -> Vec<(&String, &Employee)> {
+    let mut highest_salary = 0.0;
+    let mut highest_paid = Vec::new();
 
     for floor in mall.floors.values() {
         for store in floor.stores.values() {
             for (name, employee) in &store.employees {
-                if employee.salary > max_salary {
-                    max_salary = employee.salary;
-                    result.clear();
-                    result.push((name.clone(), *employee));
-                } else if (employee.salary - max_salary).abs() < f64::EPSILON {
-                    result.push((name.clone(), *employee));
+                if employee.salary > highest_salary {
+                    // Found a new highest salary, clear old results
+                    highest_salary = employee.salary;
+                    highest_paid.clear();
+                    highest_paid.push((name, employee));
+                } else if (employee.salary - highest_salary).abs() < std::f64::EPSILON {
+                    // Same salary as current highest, add to list
+                    highest_paid.push((name, employee));
                 }
             }
         }
     }
 
-    result
+    highest_paid
 }
 
 
