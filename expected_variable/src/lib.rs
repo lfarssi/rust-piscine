@@ -1,3 +1,4 @@
+use std::mem;
 use convert_case::{Case, Casing};
 pub fn expected_variable(origin:&str, expected:&str)->Option<String>{
      if origin.to_lowercase() == origin.to_lowercase().to_case(Case::Camel) || origin.to_lowercase()==origin.to_lowercase().to_case(Case::Snake) {
@@ -20,20 +21,33 @@ pub fn expected_variable(origin:&str, expected:&str)->Option<String>{
 
 
 pub fn edit_distance(source: &str, target: &str) -> usize {
-    let src_ln = source.len();
-    let trg_ln = target.len();
-    let mut dp = vec![vec![0;trg_ln+1];src_ln+1];
-    for i in 0..=src_ln{
-        dp[i][0]=i;
-    }
-    for j in 0..=trg_ln{
-        dp[0][j]=j;
-    }
-    for i in 1..=src_ln{
-        for j in 1..=trg_ln{
-            dp[i][j]=*[dp[i-1][j]+1, dp[i][j-1]+1,dp[i-1][j-1]+if source.chars().nth(i-1)==target.chars().nth(j-1){0}else{1}].iter().min().unwrap();
+    let m = source.len();
+    let n = target.len();
+
+    let mut v0 = (0..=n).collect::<Vec<_>>();
+    let mut v1 = vec![0; n + 1];
+
+    for i in 0..m {
+        v1[0] = i + 1;
+
+        for j in 0..n {
+            let deletion_cost = v0[j + 1] + 1;
+            let insertion_cost = v1[j] + 1;
+            let substitution_cost = v0[j]
+                + if source.chars().nth(i) == target.chars().nth(j) {
+                    0
+                } else {
+                    1
+                };
+
+            v1[j + 1] = [deletion_cost, insertion_cost, substitution_cost]
+                .into_iter()
+                .min()
+                .unwrap();
         }
+
+        mem::swap(&mut v0, &mut v1);
     }
-    // println!("{:?}",dp);
-    dp[src_ln][trg_ln]
+
+    v0[n]
 }
