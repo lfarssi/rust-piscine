@@ -28,7 +28,6 @@ pub fn highest_paid_employee(mall: &Mall) -> Vec<(&String, &Employee)> {
         for store in floor.stores.values() {
             for (name, employee) in &store.employees {
                 if employee.salary > highest_salary {
-                    // Found a new highest salary, clear old results
                     highest_salary = employee.salary;
                     highest_paid.clear();
                     highest_paid.push((name, employee));
