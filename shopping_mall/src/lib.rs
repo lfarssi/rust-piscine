@@ -22,23 +22,23 @@ pub fn biggest_store(mall: &Mall)-> (String, Store){
 
 pub fn highest_paid_employee(mall: &Mall) -> Vec<(&String, &Employee)> {
     let mut highest_salary = 0.0;
-    // These are Option because before we see any employee we don't have anything to refer to.
-    // But you'll always assign them before returning, so no None in result.
-    let mut highest_employee: Option<(&String, &Employee)> = None;
+    let mut highest_paid = Vec::new();
 
     for floor in mall.floors.values() {
         for store in floor.stores.values() {
             for (name, employee) in &store.employees {
-                if employee.salary > highest_salary {
+                if employee.salary >= highest_salary {
                     highest_salary = employee.salary;
-                    highest_employee = Some((name, employee));
+                    highest_paid.clear();
+                    highest_paid.push((name, employee));
+                } else if (employee.salary - highest_salary).abs() < std::f64::EPSILON {
+                    highest_paid.push((name, employee));
                 }
             }
         }
     }
 
-    // unwrap() is safe here because we must have at least one employee.
-    vec![highest_employee.unwrap()]
+    highest_paid
 }
 
 
