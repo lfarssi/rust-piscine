@@ -46,8 +46,6 @@ pub fn nbr_of_employees(mall: &Mall)->usize{
     let guards = mall.guards.len();
     let floors=mall.floors.values();
     let mut nbr_employees = 0;
-    let  mut res = Employee{age:0,working_hours:(0,0),salary:0.0};
-    let mut n = String::new();
     for floor in floors {
         for store in floor.stores.values(){
             nbr_employees += store.employees.len();
@@ -66,7 +64,7 @@ pub fn check_for_securities(mall: &mut Mall, mut guards:HashMap<String,Guard>){
 
        let guards_ln = mall.guards.len();
 
-       total  -= (guards_ln as u64 * 200) ; 
+       total  -= guards_ln as u64 * 200 ; 
 
         while total  >= 200 {
             if let Some((key, value)) = guards.iter().next() {

@@ -157,92 +157,92 @@ fn main() {
     );
 
     // returns the biggest store
-   // println!("Biggest store: {:#?}", biggest_store(&mall));
+   println!("Biggest store: {:#?}", biggest_store(&mall));
 
     // returns the list with the highest paid employees
-    //println!("Highest paid employee: {:#?}", highest_paid_employee(&mall));
+    println!("Highest paid employee: {:#?}", highest_paid_employee(&mall));
 
     // returns the number of employees
-    //  println!("Number of employees: {}", nbr_of_employees(&mall));
+     println!("Number of employees: {}", nbr_of_employees(&mall));
 
     // checks if it is needed to add securities
-    // check_for_securities(
-    //     &mut mall,
-    //     [
-    //         (
-    //             "Peter Solomons",
-    //             Guard {
-    //                 age: 45,
-    //                 years_experience: 20,
-    //             },
-    //         ),
-    //         (
-    //             "William Charles",
-    //             Guard {
-    //                 age: 32,
-    //                 years_experience: 10,
-    //             },
-    //         ),
-    //         (
-    //             "Leonardo Changretta",
-    //             Guard {
-    //                 age: 23,
-    //                 years_experience: 0,
-    //             },
-    //         ),
-    //         (
-    //             "Vlad Levi",
-    //             Guard {
-    //                 age: 38,
-    //                 years_experience: 8,
-    //             },
-    //         ),
-    //         (
-    //             "Faruk Berkai",
-    //             Guard {
-    //                 age: 40,
-    //                 years_experience: 15,
-    //             },
-    //         ),
-    //         (
-    //             "Christopher Smith",
-    //             Guard {
-    //                 age: 35,
-    //                 years_experience: 9,
-    //             },
-    //         ),
-    //         (
-    //             "Jason Mackie",
-    //             Guard {
-    //                 age: 26,
-    //                 years_experience: 2,
-    //             },
-    //         ),
-    //         (
-    //             "Kenzie Mair",
-    //             Guard {
-    //                 age: 34,
-    //                 years_experience: 8,
-    //             },
-    //         ),
-    //         (
-    //             "Bentley Larson",
-    //             Guard {
-    //                 age: 33,
-    //                 years_experience: 10,
-    //             },
-    //         ),
-    //         (
-    //             "Ray Storey",
-    //             Guard {
-    //                 age: 37,
-    //                 years_experience: 12,
-    //             },
-    //         ),
-    //     ]
-    //     .map(|(n, d)| (n.to_owned(), d))
-    //     .into(),
-    // );
+    check_for_securities(
+        &mut mall,
+        [
+            (
+                "Peter Solomons",
+                Guard {
+                    age: 45,
+                    years_experience: 20,
+                },
+            ),
+            (
+                "William Charles",
+                Guard {
+                    age: 32,
+                    years_experience: 10,
+                },
+            ),
+            (
+                "Leonardo Changretta",
+                Guard {
+                    age: 23,
+                    years_experience: 0,
+                },
+            ),
+            (
+                "Vlad Levi",
+                Guard {
+                    age: 38,
+                    years_experience: 8,
+                },
+            ),
+            (
+                "Faruk Berkai",
+                Guard {
+                    age: 40,
+                    years_experience: 15,
+                },
+            ),
+            (
+                "Christopher Smith",
+                Guard {
+                    age: 35,
+                    years_experience: 9,
+                },
+            ),
+            (
+                "Jason Mackie",
+                Guard {
+                    age: 26,
+                    years_experience: 2,
+                },
+            ),
+            (
+                "Kenzie Mair",
+                Guard {
+                    age: 34,
+                    years_experience: 8,
+                },
+            ),
+            (
+                "Bentley Larson",
+                Guard {
+                    age: 33,
+                    years_experience: 10,
+                },
+            ),
+            (
+                "Ray Storey",
+                Guard {
+                    age: 37,
+                    years_experience: 12,
+                },
+            ),
+        ]
+        .map(|(n, d)| (n.to_owned(), d))
+        .into(),
+    );
 
    // raises or cuts the salary of every employee
     cut_or_raise(&mut mall);
