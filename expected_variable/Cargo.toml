@@ -6,4 +6,5 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-convert_case = "0.8.0"
+convert_case = "0.6.0"
+edit_distance = { version = "0.1.0", path = "../edit_distance" }
