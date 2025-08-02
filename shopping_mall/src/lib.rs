@@ -32,10 +32,7 @@ pub fn highest_paid_employee(mall: &Mall) -> Vec<(&String, &Employee)> {
                     highest_salary = employee.salary;
                     highest_paid.clear();
                     highest_paid.push((name, employee));
-                } else if (employee.salary - highest_salary).abs() < std::f64::EPSILON {
-                    // Same salary as current highest, add to list
-                    highest_paid.push((name, employee));
-                }
+                } 
             }
         }
     }
