@@ -21,24 +21,25 @@ pub fn biggest_store(mall: &Mall)-> (String, Store){
 
 
 
-pub fn highest_paid_employee(mall: &Mall)->Vec<(String, Employee)>{
-    let floors=mall.floors.values();
-    let mut highest_salaries = 0.0;
-    let  mut res = Employee{age:0,working_hours:(0,0),salary:0.0};
-    let mut n = String::new();
-    for floor in floors {
-        for store in floor.stores.values(){
-            for (name,employee) in &store.employees{
-                if highest_salaries < employee.salary{
-                    highest_salaries = employee.salary;
-                    res=*employee;
-                    n = name.clone();
+pub fn highest_paid_employee(mall: &Mall) -> Vec<(String, Employee)> {
+    let mut max_salary = 0.0;
+    let mut result = Vec::new();
+
+    for floor in mall.floors.values() {
+        for store in floor.stores.values() {
+            for (name, employee) in &store.employees {
+                if employee.salary > max_salary {
+                    max_salary = employee.salary;
+                    result.clear();
+                    result.push((name.clone(), *employee));
+                } else if (employee.salary - max_salary).abs() < f64::EPSILON {
+                    result.push((name.clone(), *employee));
                 }
             }
-            
         }
     }
-    vec![(n,res)]
+
+    result
 }
 
 
