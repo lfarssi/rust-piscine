@@ -4,7 +4,8 @@ pub fn talking(text: &str) -> &str {
         "Just say something!"
     } else{
         match trimmed.chars().last(){
-            Some('!')=>"There is no need to yell, calm down!",
+            Some('!') if trimmed== trimmed.to_uppercase()=>"There is no need to yell, calm down!",
+            Some('!')=>"Interesting",
             Some('?')=>{
                 if trimmed==trimmed.to_uppercase(){
                    "Quiet, I am thinking!"
