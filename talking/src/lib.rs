@@ -7,7 +7,7 @@ pub fn talking(text: &str) -> &str {
             Some('!') if trimmed== trimmed.to_uppercase()=>"There is no need to yell, calm down!",
             Some('!')=>"Interesting",
             Some('?')=>{
-                if trimmed==trimmed.to_uppercase() && trimmed.chars().all(|c| c.is_ascii_alphabetic()) {
+                if trimmed==trimmed.to_uppercase() && trimmed.chars().any(|c| c.is_ascii_alphabetic()) {
                    "Quiet, I am thinking!"
                 } else{
                     "Sure."
