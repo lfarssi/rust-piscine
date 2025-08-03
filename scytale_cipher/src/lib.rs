@@ -1,4 +1,7 @@
 pub fn scytale_cipher(message: &str, i: usize) -> String {
+    if message.is_empty(){
+        return message;
+    }
     let t9simat =(message.len()+i-1)/i;
     let mut table:Vec<Vec<char>> =vec![vec![' ';i];t9simat];
     let mut res = String::new();
