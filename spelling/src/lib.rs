@@ -6,8 +6,8 @@ pub fn spell(n: u64) -> String {
     let mut res = String::new();
 
     if n >= 1_000_000 {
-        let millions_part = n / 1_000_000;
-        res.push_str(&format!("{} million", hundred(millions_part)));
+        // let millions_part = n / 1_000_000;
+        res.push_str(&format!("one million"));
     }
 
     if n >= 1000 {
