@@ -72,7 +72,7 @@ fn tens(n: u64) -> &'static str {
 
 fn hundred(n: u64) -> String {
     let ones_str = ones(n % 10);
-    let tens_str = tens((n / 10) % 10);
+    // let tens_str = tens((n / 10) % 10);
     let hundreds_str = ones(n / 100);
 
     let mut result = String::new();
