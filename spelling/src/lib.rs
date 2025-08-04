@@ -6,8 +6,8 @@ pub fn spell(n: u64) -> String {
     let mut res = String::new();
 
     if n >= 1_000_000 {
-        // let millions_part = n / 1_000_000;
-        res.push_str(&format!("one million"));
+        let millions_part = n / 1_000_000;
+        res.push_str(&format!("{} million", hundred(millions_part)));
     }
 
     if n >= 1000 {
@@ -15,7 +15,7 @@ pub fn spell(n: u64) -> String {
         if !res.is_empty() {
             res.push(' '); 
         }
-        res.push_str(&format!("{} thousand", hundred(thousands_part)));
+        res.push_str(&format!("{}", hundred(thousands_part)));
     }
 
     let remainder = n % 1000;
