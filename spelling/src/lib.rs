@@ -3,13 +3,14 @@ pub fn spell(n: u64) -> String {
         return String::from("zero");
     }
     let mut res = String::new();
+
     if n >= 1_000_000 {
         res.push_str(&format!("{} million", hundred(n / 1_000_000)));
     }
     if n >= 1000 {
         // Only add "thousand" if it's not the exact million boundary
         if !res.is_empty() {
-            res.push(' ');
+            res.push(' '); // ensure space between parts
         }
         res.push_str(&format!("{} thousand", hundred((n / 1000) % 1000)));
     }
@@ -20,7 +21,8 @@ pub fn spell(n: u64) -> String {
         }
         res.push_str(&hundred(n % 1000));
     }
-    res.trim().to_string()
+    
+    res.trim().to_string() // clean up any leading/trailing whitespace
 }
 
 fn ones(n:u64)-> &'static str{
