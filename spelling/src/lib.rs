@@ -8,14 +8,12 @@ pub fn spell(n: u64) -> String {
     if n >= 1_000_000 {
         let millions_part = n / 1_000_000;
         res.push_str(&format!("{} million", hundred(millions_part)));
-    }
-
-    if n >= 1000 {
+    } else if n >= 1000 {
         let thousands_part = (n / 1000) % 1000;
         if !res.is_empty() {
             res.push(' '); 
         }
-        res.push_str(&format!("{}", hundred(thousands_part)));
+        res.push_str(&format!("{} thousand", hundred(thousands_part)));
     }
 
     let remainder = n % 1000;
