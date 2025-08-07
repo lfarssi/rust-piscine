@@ -16,7 +16,7 @@ impl Node {
     }
 
     pub fn rm_all_ref(&mut self, element: Rc<String>) {
-        self.ref_list.retain(|e| *e!=element);
+        self.ref_list.retain(|e| *e != element);
     }
 }
 
