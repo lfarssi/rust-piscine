@@ -1,14 +1,14 @@
 use std::{cell::{ RefCell}, rc::Rc};
 pub struct Tracker {
     pub messages: RefCell<Vec<String>>,
-    value: RefCell<usize>,
+    pub value: usize,
     max: usize,
 }
 impl Tracker {
     pub fn new(max: usize) -> Self {
         Self {
             messages: RefCell::new(Vec::new()) ,
-            value: RefCell::new(0),
+            value: 0,
             max,
         }
     }
@@ -24,7 +24,6 @@ impl Tracker {
                     percentage
                 ));
             }
-            *self.value.borrow_mut()=Rc::strong_count(value);
         }
     }
     pub fn peek(&self, value: &Rc<usize>) {
