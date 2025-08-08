@@ -42,9 +42,9 @@ impl ThreadPool {
 #[derive(Debug)]
 pub struct Thread<'a> {
     
-    pid:usize,
-    cmd:String,
-    parent:&'a ThreadPool,
+    pub pid:usize,
+    pub cmd:String,
+    pub parent:&'a ThreadPool,
 }
 
 impl<'a> Thread<'a> {
