@@ -19,8 +19,8 @@ pub struct Meat {
 impl Display for Player{
     fn fmt(&self, formatter : &mut Formatter)->Res{
         writeln!(formatter, "{}", self.name);
-        writeln!(formatter, "Strength: {}, Score: {}, Money: {}\n", self.strength, self.score, self.money);
-        writeln!(formatter, "Weapons: {:?}", self.weapons)
+        writeln!(formatter, "Strength: {}, Score: {}, Money: {}", self.strength, self.score, self.money);
+        writeln!(formatter, "Weapons: {:?}\n", self.weapons)
     }
 }
 impl Player {
