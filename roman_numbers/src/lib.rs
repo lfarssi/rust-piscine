@@ -53,8 +53,8 @@ impl From<u32> for RomanNumber {
             (1, vec![I]),
         ];
         for (v, digits) in table.iter() {
-                res.extend_from_slice(&digits.repeat((n/ *v ) as usize));
-                n %= *v;
+            res.extend_from_slice(&digits.repeat((n/ *v ) as usize));
+            n %= *v;
             
         }
         RomanNumber(res)
