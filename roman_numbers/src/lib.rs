@@ -47,7 +47,7 @@ impl From<u32> for RomanNumber {
             (50, vec![L]),
             (40, vec![X, L]),
             (10, vec![X]),
-            (9, vec![V, X]),
+            (9, vec![I, X]),
             (5, vec![V]),
             (4, vec![I, V]),
             (1, vec![I]),
