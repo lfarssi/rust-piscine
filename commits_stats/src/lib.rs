@@ -2,7 +2,7 @@ use std::collections::HashMap;
 // use json::JsonValue;
 use chrono::{DateTime, Utc, Datelike};
 
-pub fn commits_per_week(data: &json::JsonValue) -> HashMap<String, u32> {
+pub fn commits_per_author(data: &json::JsonValue) -> HashMap<String, u32> {
     let mut map= HashMap::new();
     for member in data.members() {
         if let Some(login)= member["author"]["login"].as_str(){
@@ -13,7 +13,7 @@ pub fn commits_per_week(data: &json::JsonValue) -> HashMap<String, u32> {
 
 }
 
-pub fn commits_per_author(data: &json::JsonValue) -> HashMap<String, u32> {
+pub fn commits_per_week(data: &json::JsonValue) -> HashMap<String, u32> {
     let mut map = HashMap::new();
     for member in data.members(){
         if let Some(date)= member["commit"]["author"]["date"].as_str(){
