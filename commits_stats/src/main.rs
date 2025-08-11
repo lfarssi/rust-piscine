@@ -1,4 +1,5 @@
 use commits_stats::{commits_per_week, commits_per_author};
+use std::fs;
 
 fn main() {
 	let contents = fs::read_to_string("commits.json").unwrap();
