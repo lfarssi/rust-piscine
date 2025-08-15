@@ -1,4 +1,5 @@
-#[derive(Debug, PartialEq, Eq)]
+use std::ops::Mul;
+#[derive(Debug,Clone, PartialEq, Eq)]
 pub struct Matrix<T>(pub Vec<Vec<T>>);
 use lalgebra_scalar::Scalar;
 
@@ -27,7 +28,7 @@ impl <T: Scalar> Matrix<T> {
         Matrix(res)
 	}
     pub fn number_of_cols(&self) -> usize {
-        self.0.iter().len()
+        self.0[0].len()
 	}
 
 	pub fn number_of_rows(&self) -> usize {
@@ -45,4 +46,26 @@ impl <T: Scalar> Matrix<T> {
         }
         res
 	}
-}   
+}
+impl<T: Scalar +Clone + Mul<Output=T>> Mul for Matrix<T> {
+    type Output = Option<Matrix<T>>;
+
+    fn mul(self, other: Matrix<T>) -> Self::Output {
+        if self.number_of_rows() != other.number_of_rows()
+            || self.number_of_cols() != self.number_of_cols()
+        {
+            return None;
+        }
+        let mut res = vec![vec![T::zero();self.number_of_cols()]; self.number_of_rows()];
+        for i in 0..self.number_of_rows() {
+            for j in 0..self.number_of_cols() {
+                let mut sum =T::zero();
+                for k in 0..self.number_of_cols(){
+                    sum = sum + self.0[i][k] * other.0[k][j];
+                }
+                res[i][j]= sum;
+            }
+        }
+        Some(Matrix(res))
+    }
+}

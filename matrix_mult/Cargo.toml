@@ -1,0 +1,8 @@
+[package]
+name = "matrix_mult"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+lalgebra_scalar = { version = "0.1.0", path = "../lalgebra_scalar" }
+matrix = { version = "0.1.0", path = "../matrix" }
