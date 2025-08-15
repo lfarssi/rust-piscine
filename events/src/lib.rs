@@ -40,7 +40,7 @@ impl Event<'_> {
 	pub fn notify(&self) -> Notification {
         match self {
             Remainder(text)=> Notification{
-                size :20,
+                size :50,
                 color: (50, 50, 50),
                 position: Position::Bottom,
                 content: text.to_string(),
