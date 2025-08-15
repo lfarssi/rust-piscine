@@ -61,8 +61,8 @@ impl<T: Scalar +Clone + Mul<Output=T>> Mul for Matrix<T> {
             for j in 0..self.number_of_cols() {
                 let mut sum =T::zero();
                 for k in 0..self.number_of_cols(){
-                    sum = sum + self.0[i][k] * other.0[k][j];
-                }
+                    sum= sum + self.row(i)[k] * other.col(j)[k];
+                } 
                 res[i][j]= sum;
             }
         }
