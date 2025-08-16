@@ -15,7 +15,7 @@ impl<'a> Numbers<'a> {
     }
 
     pub fn latest(&self) -> Option<u32> {
-        self.numbers[self.numbers.len()-1].copied()
+        self.numbers.last().copied()
     }
 
     pub fn highest(&self) -> Option<u32> {
