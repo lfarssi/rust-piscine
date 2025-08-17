@@ -36,6 +36,6 @@ impl<T> std::iter::Iterator for StepIterator<T> where T: Add<Output=T> + Copy + 
 		} else {
 			self.beg = next;
 		}
-		Some(self.beg)
+		Some(curr)
 	}
 }
