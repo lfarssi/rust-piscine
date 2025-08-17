@@ -31,9 +31,9 @@ impl Iterator for ThrowObject {
     type Item = ThrowObject;
     fn next(&mut self) -> Option<Self::Item> {
         let g = 9.8;
-        self.time +=1.0;
+        self.time += 1.0;
 
-        let vx = self.init_velocity.x; 
+        let vx = self.init_velocity.x;
         let vy = self.init_velocity.y - g * self.time;
 
         let x = self.init_position.x + self.init_velocity.x * self.time;
@@ -43,8 +43,14 @@ impl Iterator for ThrowObject {
             return None;
         }
 
-        self.actual_velocity = Object { x: vx, y: vy };
-        self.actual_position = Object { x, y };
+        self.actual_velocity = Object {
+            x: (vx * 10.0).round() / 10.0,
+            y: (vy * 10.0).round() / 10.0,
+        };
+        self.actual_position = Object {
+            x: (x * 10.0).round() / 10.0,
+            y: (y * 10.0).round() / 10.0,
+        };
 
         Some(self.clone())
     }
